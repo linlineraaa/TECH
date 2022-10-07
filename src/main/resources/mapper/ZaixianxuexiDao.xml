@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.ZaixianxuexiDao">
+
+    <resultMap type="com.entity.view.ZaixianxuexiView" id="zaixianxuexiMap">
+        <result property="kechengbianhao" column="course_id"/>
+        <result property="kechengmingcheng" column="course_name"/>
+        <result property="kechengleixing" column="course_type"/>
+        <result property="tupian" column="picture"/>
+        <result property="shipin" column="video"/>
+        <result property="xuexiziliao" column="information"/>
+        <result property="kechengneirong" column="course_content"/>
+        <result property="kechengliangdian" column="course_highlight"/>
+        <result property="kechengjieshao" column="course_introduction"/>
+        <result property="thumbsupnum" column="thumbsupnum"/>
+        <result property="crazilynum" column="crazilynum"/>
+    </resultMap>
+
+	<select id="selectListVO"
+		resultType="com.entity.vo.ZaixianxuexiVO" >
+		SELECT * FROM course  course
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+	<select id="selectVO"
+		resultType="com.entity.vo.ZaixianxuexiVO" >
+		SELECT  course.* FROM course  course
+ 		<where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+    <select id="selectListView"
+		resultMap="zaixianxuexiMap" >
+
+		SELECT  course.* FROM course  course
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+	<select id="selectView"
+            resultMap="zaixianxuexiMap" >
+		SELECT * FROM course  course <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+
+</mapper>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.RecordMapper">
+
+    <resultMap type="com.entity.Record" id="RecordResult">
+        <result property="id"    column="id"    />
+        <result property="addtime"    column="addtime"    />
+        <result property="userid"    column="userid"    />
+        <result property="papername"    column="papername"    />
+        <result property="paperid"    column="paperid"    />
+        <result property="score"    column="score"    />
+    </resultMap>
+
+    <sql id="selectRecordVo">
+        select id, addtime, userid, papername, paperid, score from record
+    </sql>
+
+    <select id="countRecord" parameterType="com.entity.Record" resultType="java.lang.Long">
+        select count(1) from record
+        <where>
+            <if test="addtime != null "> and addtime = #{addtime}</if>
+            <if test="userid != null "> and userid = #{userid}</if>
+            <if test="papername != null  and papername != ''"> and papername like concat('%', #{papername}, '%')</if>
+            <if test="paperid != null "> and paperid = #{paperid}</if>
+            <if test="score != null "> and score = #{score}</if>
+        </where>
+    </select>
+
+    <select id="selectRecordList" parameterType="com.entity.Record" resultMap="RecordResult">
+        <include refid="selectRecordVo"/>
+        <where>
+            <if test="Record.addtime != null "> and addtime = #{Record.addtime}</if>
+            <if test="Record.userid != null "> and userid = #{Record.userid}</if>
+            <if test="Record.papername != null  and Record.papername != ''"> and papername like concat('%', #{Record.papername}, '%')</if>
+            <if test="Record.paperid != null "> and paperid = #{Record.paperid}</if>
+            <if test="Record.score != null "> and score = #{Record.score}</if>
+        </where>
+        limit #{pageNum},#{pageSize}
+    </select>
+
+    <select id="selectRecordById" parameterType="Long" resultMap="RecordResult">
+        <include refid="selectRecordVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertRecord" parameterType="com.entity.Record">
+        insert into record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="addtime != null">addtime,</if>
+            <if test="userid != null">userid,</if>
+            <if test="papername != null">papername,</if>
+            <if test="paperid != null">paperid,</if>
+            <if test="score != null">score,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="addtime != null">#{addtime},</if>
+            <if test="userid != null">#{userid},</if>
+            <if test="papername != null">#{papername},</if>
+            <if test="paperid != null">#{paperid},</if>
+            <if test="score != null">#{score},</if>
+        </trim>
+    </insert>
+
+    <update id="updateRecord" parameterType="com.entity.Record">
+        update record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="addtime != null">addtime = #{addtime},</if>
+            <if test="userid != null">userid = #{userid},</if>
+            <if test="papername != null">papername = #{papername},</if>
+            <if test="paperid != null">paperid = #{paperid},</if>
+            <if test="score != null">score = #{score},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRecordById" parameterType="Long">
+        delete from record where id = #{id}
+    </delete>
+
+    <delete id="deleteRecordByIds" parameterType="String">
+        delete from record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

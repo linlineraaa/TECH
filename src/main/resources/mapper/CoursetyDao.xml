@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.CoursetyDao">
+
+    <resultMap type="com.entity.view.CoursetyView" id="kechengfenleiMap">
+        <result property="kechengleixing" column="course_type"/>
+    </resultMap>
+
+	<select id="selectListVO"
+		resultType="com.entity.vo.KechengfenleiVO" >
+		SELECT * FROM coursety  coursety
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+	<select id="selectVO"
+		resultType="com.entity.vo.KechengfenleiVO" >
+		SELECT  coursety.* FROM coursety  coursety
+ 		<where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+    <select id="selectListView"
+		resultMap="kechengfenleiMap" >
+
+		SELECT  coursety.* FROM coursety  coursety
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+	<select id="selectView"
+			resultMap="kechengfenleiMap" >
+		SELECT * FROM coursety  coursety <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+
+</mapper>

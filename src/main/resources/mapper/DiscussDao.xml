@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.DiscussDao">
+
+    <resultMap type="com.entity.DiscusszaixianxuexiEntity" id="discusszaixianxuexiMap">
+        <result property="refid" column="refid"/>
+        <result property="userid" column="userid"/>
+        <result property="content" column="content"/>
+        <result property="reply" column="reply"/>
+    </resultMap>
+
+	<select id="selectListVO"
+		resultType="com.entity.vo.DiscusszaixianxuexiVO" >
+		SELECT * FROM discuss  discuss
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+	<select id="selectVO"
+		resultType="com.entity.vo.DiscusszaixianxuexiVO" >
+		SELECT  discuss.* FROM discuss  discuss
+ 		<where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+    <select id="selectListView"
+		resultType="com.entity.view.DiscusszaixianxuexiView" >
+
+		SELECT  discuss.* FROM discuss  discuss
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+	<select id="selectView"
+		resultType="com.entity.view.DiscusszaixianxuexiView" >
+		SELECT * FROM discuss  discuss <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+
+</mapper>

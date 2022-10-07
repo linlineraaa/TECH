@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.YonghuDao">
+
+    <resultMap type="com.entity.view.YonghuView" id="yonghuMap">
+        <result property="yonghuming" column="account"/>
+        <result property="mima" column="password"/>
+        <result property="xingming" column="username"/>
+        <result property="nianling" column="age"/>
+        <result property="xingbie" column="sex"/>
+        <result property="shouji" column="phone"/>
+        <result property="youxiang" column="mail"/>
+        <result property="shenfenzheng" column="student_number"/>
+    </resultMap>
+
+	<select id="selectListVO"
+		resultType="com.entity.vo.YonghuVO" >
+		SELECT * FROM user  user
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+	<select id="selectVO"
+		resultType="com.entity.vo.YonghuVO" >
+		SELECT  user.* FROM user  user
+ 		<where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+    <select id="selectListView"
+		resultMap="yonghuMap" >
+		SELECT  user.* FROM user  user
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+	<select id="selectView"
+			resultMap="yonghuMap" >
+		SELECT * FROM user  user <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+
+</mapper>

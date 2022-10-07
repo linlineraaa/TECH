@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title></title>
+  <link rel="stylesheet" href="../../layui/css/layui.css">
+
+  <link rel="stylesheet" href="../../css/style.css"/>
+
+  <link rel="stylesheet" href="../../css/theme.css"/>
+
+  <link rel="stylesheet" href="../../css/common.css"/>
+</head>
+<body>
+
+<div id="app">
+  <div class="center-container">
+    <iframe src="https://gcc.godbolt.org/" width="100%" height="580"></iframe>
+  </div>
+
+  <!-- layui -->
+  <script src="../../layui/layui.js"></script>
+  <script src="../../modules/config.js"></script>
+
+  <script>
+    layui.use(['layer', 'http'], function() {
+      var layer = layui.layer;
+      var http = layui.http;
+
+      let table = localStorage.getItem("userTable");
+      if(!table){
+        layer.msg('Please login first', {
+          time: 2000,
+          icon: 5
+        }, function() {
+          window.parent.location.href = '../login/login.html';
+        });
+      }
+      http.request(`yonghu/session`, 'get', {}, function() {})
+    });
+  </script>
+
+</div>
+
+
+</body>
+</html>
